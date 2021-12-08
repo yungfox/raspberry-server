@@ -1,7 +1,8 @@
 const joystick = require('./schema')
+const moment = require('moment')
 
 module.exports.store = async(data) => {
-    console.log('entrato nel model')
+    data.date = moment(new Date()).utcOffset(0, true)
     return joystick.create(data)
 }
 

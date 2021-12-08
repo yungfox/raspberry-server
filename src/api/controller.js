@@ -2,10 +2,9 @@ const joystickModel = require('./model')
 
 module.exports.store = async(req, res, next) => {
     try {
-        console.log('entrato nel controller')
         const tmp = await joystickModel.store(req.body)
-        res.status(201)
         res.json(tmp)
+        res.status(201)
     } catch (err) {
         next(err)
     }

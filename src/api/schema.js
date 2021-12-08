@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
 
-const joystickSchema = mongoose.Schema({
+let joystickSchema = mongoose.Schema({
     date: Date,
-    xPosition: Number,
-    yPosition: Number,
-    switch: Boolean
+    xPosition: { type: Number, required: true },
+    yPosition: { type: Number, required: true },
+    switch: false
+}, {
+    collection: 'history'
 })
 
-module.exports = mongoose.model('joystickData', joystickSchema)
+module.exports = mongoose.model('history', joystickSchema)
