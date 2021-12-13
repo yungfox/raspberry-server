@@ -1,2 +1,2 @@
 # raspberry-server
-[ ] Sostituisci in model.js il find con findOne
+[_] Sostituisci in model.js il find con findOne
