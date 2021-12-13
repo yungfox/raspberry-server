@@ -8,7 +8,7 @@
 
 const char* ssid = "";
 const char* password =  "";
-const char* serverName = "http://:3000/api";
+const char* serverName = "http://172.16.5.4:3000/api";
 unsigned long lastTime = 0;
 unsigned long timerDelay = 1000;
 
@@ -42,8 +42,8 @@ void loop() {
       http.addHeader("Content-Type", "application/json");
 
       http.POST("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+",\"switch\":\""+String(button)+"\"}");
-      #ifdef
-      Serial.println("Post send!");
+      #ifdef DEBUG
+      Serial.println("Data sent!");
       #endif
     }
     else {

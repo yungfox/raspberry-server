@@ -7,5 +7,5 @@ module.exports.store = async(data) => {
 }
 
 module.exports.find = async(query) => {
-    return joystick.find(query).sort({ date: -1 })
+    return joystick.findOne(query).sort({ date: -1 })
 }
