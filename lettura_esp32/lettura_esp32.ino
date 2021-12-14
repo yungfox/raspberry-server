@@ -8,11 +8,11 @@
 #define LED3 17
 #define DEBUG
 
-const char* ssid = "";
-const char* password =  "";
-const char* serverName = "http://:3000/api";
+const char* ssid = "TCPBerry_2.4";
+const char* password =  "Vmware1!";
+const char* serverName = "http://172.16.5.4:3000/api";
 unsigned long lastTime = 0;
-unsigned long timerDelay = 1000;
+unsigned long timerDelay = 50;
 
 void setup(){
   #ifdef DEBUG
@@ -58,7 +58,7 @@ void loop() {
         bool switchBtn = doc["switch"];
         Serial.println("DATE= " + date + "\n" + "XPOSITION= " + xPosition + "\n" + "YPOSITION= " + yPosition + "\n" + "SWITCH= " + switchBtn + "\n--------");
         #endif
-        
+
         analogWrite(LED1,int(doc["xPosition"]) / 16.0588235);
         analogWrite(LED2,int(doc["yPosition"]) / 16.0588235);
         digitalWrite(LED3,bool(doc["switch"]));

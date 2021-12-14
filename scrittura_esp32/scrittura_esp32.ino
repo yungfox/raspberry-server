@@ -41,7 +41,7 @@ void loop() {
       
       http.addHeader("Content-Type", "application/json");
 
-      http.POST("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+",\"switch\":\""+String(button)+"\"}");
+      http.POST("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+",\"switch\":"+String(button)+"}");
       #ifdef
       Serial.println("Post send!");
       #endif
