@@ -1,16 +1,17 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-#define JOYSTICK_X 32
-#define JOYSTICK_Y 33
-#define JOYSTICK_BUTTON 34
+#define JOYSTICK_X 34
+#define JOYSTICK_Y 35
+#define JOYSTICK_BUTTON 32
 #define DEBUG
 
 const char* ssid = "";
 const char* password =  "";
-const char* serverName = "http://:3000/api";
+const char* serverName = "http://172.16.5.4:3000/api";
 unsigned long lastTime = 0;
 unsigned long timerDelay = 1000;
+bool button;
 
 void setup(){
   #ifdef DEBUG
@@ -18,19 +19,22 @@ void setup(){
   while(!Serial.available()){;;}
   #endif
   WiFi.begin(ssid, password);
+  pinMode(JOYSTICK_X, INPUT);
+  pinMode(JOYSTICK_Y, INPUT);
   pinMode(JOYSTICK_BUTTON, INPUT_PULLUP);
+  button = digitalRead(JOYSTICK_BUTTON);
 }
+
 
 void loop() {
   if ((millis() - lastTime) > timerDelay) {
     int x = analogRead(JOYSTICK_X);
     int y = analogRead(JOYSTICK_Y);
-    bool button = digitalRead(JOYSTICK_BUTTON);
 
     #ifdef DEBUG
     Serial.print("XPOSITION= " + String(x));
     Serial.print(",\tYPOSITION= " + String(y));
-    Serial.println(",\tSWITCH= " + String(button));
+    Serial.println(",\tSWITCH= " + String(analogRead(JOYSTICK_BUTTON)));
     #endif
     
     //Check WiFi connection status
@@ -41,8 +45,12 @@ void loop() {
       
       http.addHeader("Content-Type", "application/json");
 
-      http.POST("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+",\"switch\":"+String(button)+"}");
-      #ifdef
+      if(button != digitalRead(JOYSTICK_BUTTON)){
+        button = !button;
+        http.PATCH("{\"switch:\""+String(button)+"}");
+      }
+      http.PATCH("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+"}");
+      #ifdef DEBUG
       Serial.println("Post send!");
       #endif
     }
