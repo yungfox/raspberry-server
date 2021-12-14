@@ -8,9 +8,9 @@
 #define LED3 17
 #define DEBUG
 
-const char* ssid = "TCPBerry_2.4";
-const char* password =  "Vmware1!";
-const char* serverName = "http://172.16.5.4:3000/api";
+const char* ssid = "";
+const char* password =  "";
+const char* serverName = "http://:3000/api";
 unsigned long lastTime = 0;
 unsigned long timerDelay = 50;
 
