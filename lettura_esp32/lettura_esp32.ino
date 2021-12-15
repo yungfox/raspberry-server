@@ -3,16 +3,16 @@
 #include <analogWrite.h>
 #include <ArduinoJson.h>
 
-#define LED1 15
-#define LED2 16
-#define LED3 17
-#define DEBUG
+#define LED1 32
+#define LED2 33
+#define LED3 25
+//#define DEBUG
 
 const char* ssid = "TCPBerry_2.4";
 const char* password =  "Vmware1!";
 const char* serverName = "http://172.16.5.4:3000/api";
 unsigned long lastTime = 0;
-unsigned long timerDelay = 50;
+unsigned long timerDelay = 40;
 
 void setup(){
   #ifdef DEBUG
