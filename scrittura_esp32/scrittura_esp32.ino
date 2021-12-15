@@ -52,7 +52,6 @@ void loop() {
       http.PATCH("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+"}");
       #ifdef DEBUG
       Serial.println("Post send!");
-      #endif
     }
     else {
       #ifdef DEBUG

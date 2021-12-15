@@ -4,9 +4,9 @@ let joystickSchema = mongoose.Schema({
     date: Date,
     xPosition: { type: Number, required: true },
     yPosition: { type: Number, required: true },
-    switch: false
+    switch: false,
 }, {
-    collection: 'history'
+    collection: 'status'
 })
 
-module.exports = mongoose.model('history', joystickSchema)
+module.exports = mongoose.model('status', joystickSchema)
