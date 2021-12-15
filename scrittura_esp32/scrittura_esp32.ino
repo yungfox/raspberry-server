@@ -49,7 +49,7 @@ void loop() {
       if(button != digitalRead(JOYSTICK_BUTTON)){
         Serial.println(button);
         button = !button;
-        http.POST("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+"\"switch\":"+String(button)+"}");
+        http.POST("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+",\"switch\":"+String(button)+"}");
       }else{
         http.PATCH("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+"}");
       }
