@@ -4,16 +4,17 @@
 #define JOYSTICK_X 34
 #define JOYSTICK_Y 35
 #define JOYSTICK_BUTTON 32
-#define DEBUG
+//#define DEBUG
 
 const char* ssid = "TCPBerry_2.4";
 const char* password =  "Vmware1!";
 const char* serverName = "http://172.16.5.4:3000/api";
 unsigned long lastTime = 0;
-unsigned long timerDelay = 1000;
+unsigned long timerDelay = 40;
 bool button;
 
 void setup(){
+  Serial.begin(9600);
   #ifdef DEBUG
   Serial.begin(9600);
   while(!Serial.available()){;;}
@@ -34,7 +35,7 @@ void loop() {
     #ifdef DEBUG
     Serial.print("XPOSITION= " + String(x));
     Serial.print(",\tYPOSITION= " + String(y));
-    Serial.println(",\tSWITCH= " + String(analogRead(JOYSTICK_BUTTON)));
+    Serial.println(",\tSWITCH= " + String(digitalRead(JOYSTICK_BUTTON)));
     #endif
     
     //Check WiFi connection status
@@ -46,12 +47,15 @@ void loop() {
       http.addHeader("Content-Type", "application/json");
 
       if(button != digitalRead(JOYSTICK_BUTTON)){
+        Serial.println(button);
         button = !button;
-        http.PATCH("{\"switch:\""+String(button)+"}");
+        http.POST("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+"\"switch\":"+String(button)+"}");
+      }else{
+        http.PATCH("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+"}");
       }
-      http.PATCH("{\"xPosition\":"+String(x)+",\"yPosition\":"+String(y)+"}");
       #ifdef DEBUG
-      Serial.println("Post send!");
+      Serial.println("Data send!");
+      #endif
     }
     else {
       #ifdef DEBUG
